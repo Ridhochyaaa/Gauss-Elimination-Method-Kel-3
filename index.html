@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gauss Elimination Method</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="Octaedro/png" href="img/Octaedro.png">
+</head>
+<body>
+    <div id="container">
+        <div class="story">
+            <div class="details">
+                <div class="text-story">
+                    <h1>Gauss Elimination Method</h1>
+                    <p>Metode eliminasi Gauss digunakan untuk menyelesaikan sistem persamaan linear. Mari kita ingat kembali definisi sistem persamaan ini. Sistem persamaan linier adalah sekelompok persamaan linier dengan berbagai faktor yang tidak diketahui. Seperti yang kita ketahui, faktor-faktor yang tidak diketahui ada dalam banyak persamaan.</p>    
+                    <a href="https://id.wikipedia.org/wiki/Eliminasi_Gauss"><button class="button">Learn more</button></a>
+                </div>
+                <img src="img/gauss.jpg" alt="">
+            </div>
+            <div class="kelompok">
+                <div class="text-kelompok">
+                    <h1>Kelompok Masakini</h1>
+                    <div class="image-container-kel">
+                        <div class="image-box">
+                            <a href="https://www.instagram.com/ridhochyaaa/"><img src="img/kelompok.jpg" alt=""></a>
+                            <p>Ridho Cahya Pangeran <br><br>
+                            41522110036</p>
+                        </div>
+                        <div class="image-box">
+                            <a href="#"><img src="img/kelompok.jpg" alt=""></a>
+                            <p>Moh. Rifan Fitrotul Muttaqin <br><br>
+                            41522110031</p>
+                        </div>
+                        <div class="image-box">
+                            <a href="https://www.instagram.com/irfanfauzanrahman/"><img src="img/kelompok.jpg" alt=""></a>
+                            <p>Irfan Fauzan Rachman <br><br>
+                            41522110008</p>
+                        </div>
+                        <div class="image-box">
+                            <a href="#"><img src="img/kelompok.jpg" alt=""></a>
+                            <p>Muhammad Andry Apriliany Nur <br><br>
+                            41522110039
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pengertian">
+                <div class="text-pengertian">
+                    <h1>Operasi Pivoting</h1>
+                    <p>Metode Eliminasi Gauss dengan Pivoting adalah metode numerik untuk menyelesaikan sistem persamaan linear. Metodi ini memanfaatkan operasi baris elementer pada matriks augmented untuk menghasilkan matriks segitiga atas. Pivoting pada metode ini digunakan untuk menghindari pembagian dengan bilangan nol dan memperkecil kesalahan pembulatan. </p>    
+                </div>
+                <img src="img/pengertian1.png" alt="">
+            </div>
+            <div class="pengertian-1">
+                <div class="text-pengertian-1">
+                    <h1>Operasi baris dasar</h1>
+                    <p>Setelah menyusun sistem persamaan linear menjadi sebuah matriks koefisien, eliminasi Gauss melakukan serangkaian operasi baris dasar untuk "menyederhanakan" baris-baris matriks. Eliminasi ini dapat dibagi menjadi dua bagian. Bagian pertama, terkadang disebut dengan eliminasi maju, mereduksi sistem yang diberikan ke dalam bentuk eselon baris.</p>    
+                </div>
+                <img src="img/pengertian2-removebg-preview.png" alt="">
+            </div>
+            <div class="pengertian">
+                <div class="text-pengertian">
+                    <h1>Bentuk eselon baris</h1>
+                    <p>Untuk setiap baris pada matriks, jika entri baris tersebut tidak semuanya terdiri dari angka nol, maka entri bukan nol pertama (dari kiri) disebut koefisien utama (atau pivot) dari baris itu. Lebih lanjut, jika ada dua koefisien utama berada di kolom yang sama, maka operasi baris jenis ke-3 dapat digunakan untuk membuat salah satu koefisien tersebut menjadi nol. Operasi baris jenis ke-1 selanjutnya dipakai untuk mengurutkan baris-baris.</p>    
+                </div>
+                <img src="img/pengertian3-removebg-preview.png" alt="">
+            </div>
+            <div class="hitung-gauss">
+                <h2>Hitung Metode Eliminasi Gauss</h2>
+                <p>Berikut cara memakainya cukup masukan matriks 3x3 atau 2x2 dan akan muncul soalnya</p>
+                <div class="form-gauss">
+                    <label for="matrixSize">Ukuran Matriks (n x n):</label>
+                    <input type="number" id="matrixSize" name="matrixSize" min="2" placeholder="Masukkan ukuran matriks">
+                    <button onclick="hitungGauss()">Hitung</button>
+                </div>
+        
+                <div class="hasil-gauss" id="hasilGauss">
+                    <!-- Hasil perhitungan Gauss elimination method akan ditampilkan di sini -->
+                </div>
+            </div>
+            <div class="footer">
+                <!-- Konten footer di sini -->
+                <p>Made with &hearts; Kelompok 3</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function hitungGauss() {
+            const matrixSize = parseInt(document.getElementById('matrixSize').value);
+            const hasilGaussElement = document.getElementById('hasilGauss');
+
+            if (matrixSize < 2) {
+                hasilGaussElement.innerHTML = "<p>Ukuran matriks harus minimal 2x2.</p>";
+                return;
+            }
+
+            // Generate random matrix for demonstration
+            const originalMatrix = generateRandomMatrix(matrixSize);
+
+            // Display original matrix
+            hasilGaussElement.innerHTML = `<h3>Matriks Awal : </h3>${displayMatrix(originalMatrix)}`;
+
+            // Implement Gauss elimination method
+            const solvedMatrix = solveGauss(originalMatrix);
+
+            // Display solved matrix
+            hasilGaussElement.innerHTML += `<h3>Matriks Setelah Eliminasi : </h3>${displayMatrix(solvedMatrix)}`;
+
+            // Display solution of the system
+            hasilGaussElement.innerHTML += `<h3>Solusi : </h3>${displaySolution(solvedMatrix)}`;
+        }
+
+        function generateRandomMatrix(size) {
+            const matrix = [];
+            for (let i = 0; i < size; i++) {
+                matrix[i] = [];
+                for (let j = 0; j < size + 1; j++) {
+                    matrix[i][j] = Math.floor(Math.random() * 10) + 1; // Random values between 1 and 10
+                }
+            }
+            return matrix;
+        }
+
+        function displayMatrix(matrix) {
+            let result = '<pre>';
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[i].length; j++) {
+                    result += `${matrix[i][j]}\t`;
+                }
+                result += '\n';
+            }
+            result += '</pre>';
+            return result;
+        }
+
+        function solveGauss(matrix) {
+            // Implement Gauss elimination method
+            // This is a simplified example, and you may want to implement a more complete solution.
+            const size = matrix.length;
+
+            for (let i = 0; i < size; i++) {
+                // Make the diagonal element 1
+                const divisor = matrix[i][i];
+                for (let j = i; j < size + 1; j++) {
+                    matrix[i][j] /= divisor;
+                }
+
+                // Make the other elements in the column 0
+                for (let k = 0; k < size; k++) {
+                    if (k !== i) {
+                        const factor = matrix[k][i];
+                        for (let j = i; j < size + 1; j++) {
+                            matrix[k][j] -= factor * matrix[i][j];
+                        }
+                    }
+                }
+            }
+
+            return matrix;
+        }
+
+        function displaySolution(matrix) {
+            let result = '<p>';
+            for (let i = 0; i < matrix.length; i++) {
+                result += `x${i + 1} = ${matrix[i][matrix[i].length - 1].toFixed(2)} `;
+            }
+            result += '</p>';
+            return result;
+        }
+    </script>
+</body>
+</html>
